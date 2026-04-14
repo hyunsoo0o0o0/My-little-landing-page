@@ -7,11 +7,15 @@ import type { Props as AstroSeoProps } from '@astrolib/seo';
 import { SITE, METADATA, I18N } from 'astrowind:config';
 import type { MetaData } from '~/types';
 import { getCanonical } from '~/utils/permalinks';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import type { Locale } from '~/i18n';
+import { locales } from '~/i18n';
 
 import { adaptOpenGraphImages } from '~/utils/images';
 
 export interface Props extends MetaData {
   dontUseTitleTemplate?: boolean;
+  lang?: Locale;
 }
 
 const {
@@ -22,7 +26,15 @@ const {
   description,
   openGraph = {},
   twitter = {},
+  lang = 'en',
 } = Astro.props;
+
+const alternateLang = lang === 'en' ? 'ko' : 'en';
+const base = SITE.base || '/';
+const localePrefixPattern = new RegExp(`^${base}(${locales.join('|')})`);
+const currentPath = Astro.url.pathname.replace(localePrefixPattern, '') || '/';
+const locale = lang;
+const alternateLocale = alternateLang;
 
 const seoProps: AstroSeoProps = merge(
   {
@@ -36,7 +48,8 @@ const seoProps: AstroSeoProps = merge(
       url: canonical,
       site_name: SITE?.name,
       images: [],
-      locale: I18N?.language || 'en',
+      locale: locale,
+      alternateLocale: alternateLocale,
       type: 'website',
     },
     twitter: {
@@ -66,3 +79,7 @@ const seoProps: AstroSeoProps = merge(
 ---
 
 <AstroSeo {...{ ...seoProps, openGraph: await adaptOpenGraphImages(seoProps?.openGraph, Astro.site) }} />
+
+<link rel="alternate" hreflang="en" href={getRelativeLocaleUrl('en', currentPath)} />
+<link rel="alternate" hreflang="ko" href={getRelativeLocaleUrl('ko', currentPath)} />
+<link rel="alternate" hreflang="x-default" href={getRelativeLocaleUrl('en', currentPath)} />

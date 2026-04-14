@@ -1,4 +1,6 @@
 ---
+import type { GetStaticPaths } from 'astro';
+import { locales, type Locale } from '~/i18n';
 import Features2 from '~/components/widgets/Features2.astro';
 import Features3 from '~/components/widgets/Features3.astro';
 import Hero from '~/components/widgets/Hero.astro';
@@ -6,12 +8,18 @@ import Stats from '~/components/widgets/Stats.astro';
 import Steps2 from '~/components/widgets/Steps2.astro';
 import Layout from '~/layouts/PageLayout.astro';
 
+export const getStaticPaths: GetStaticPaths = async () => {
+  return locales.map((locale) => ({ params: { lang: locale } }));
+};
+
+const { lang } = Astro.params as { lang: Locale };
+
 const metadata = {
   title: 'About us',
 };
 ---
 
-<Layout metadata={metadata}>
+<Layout metadata={metadata} lang={lang}>
   <!-- Hero Widget ******************* -->
 
   <Hero

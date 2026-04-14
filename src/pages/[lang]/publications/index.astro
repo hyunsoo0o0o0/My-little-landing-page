@@ -1,13 +1,21 @@
 ---
+import type { GetStaticPaths } from 'astro';
+import { locales, type Locale } from '~/i18n';
 import Hero from '~/components/widgets/Hero.astro';
 import Layout from '~/layouts/PageLayout.astro';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  return locales.map((locale) => ({ params: { lang: locale } }));
+};
+
+const { lang } = Astro.params as { lang: Locale };
 
 const metadata = {
   title: 'Publications',
 };
 ---
 
-<Layout metadata={metadata}>
+<Layout metadata={metadata} lang={lang}>
   <Hero
     tagline="Publications"
     title="Research & Patents"

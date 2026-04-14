@@ -1,0 +1,24 @@
+{
+  "nav": {
+    "features": "Features",
+    "generation": "Generation",
+    "evaluation": "Evaluation",
+    "useCases": "Use Cases",
+    "brainImaging": "Brain Imaging",
+    "breastCancer": "Breast Cancer",
+    "environment": "Environment",
+    "publications": "Publications",
+    "docs": "Docs",
+    "download": "Download"
+  },
+  "footer": {
+    "resources": "Resources",
+    "company": "Company",
+    "about": "About",
+    "madeBy": "Made by"
+  },
+  "common": {
+    "learnMore": "Learn more",
+    "getStarted": "Get started"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "nav": {
+    "features": "기능",
+    "generation": "생성",
+    "evaluation": "평가",
+    "useCases": "활용 사례",
+    "brainImaging": "뇌 영상",
+    "breastCancer": "유방암",
+    "environment": "환경",
+    "publications": "논문",
+    "docs": "문서",
+    "download": "다운로드"
+  },
+  "footer": {
+    "resources": "리소스",
+    "company": "회사",
+    "about": "소개",
+    "madeBy": "제작자"
+  },
+  "common": {
+    "learnMore": "자세히 보기",
+    "getStarted": "시작하기"
+  }
+}

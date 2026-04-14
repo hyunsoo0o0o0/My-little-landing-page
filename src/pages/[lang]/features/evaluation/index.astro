@@ -1,15 +1,23 @@
 ---
+import type { GetStaticPaths } from 'astro';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { locales, type Locale } from '~/i18n';
 import Features2 from '~/components/widgets/Features2.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Layout from '~/layouts/PageLayout.astro';
-import { getPermalink } from '~/utils/permalinks';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  return locales.map((locale) => ({ params: { lang: locale } }));
+};
+
+const { lang } = Astro.params as { lang: Locale };
 
 const metadata = {
   title: 'Evaluation',
 };
 ---
 
-<Layout metadata={metadata}>
+<Layout metadata={metadata} lang={lang}>
   <Hero
     tagline="Features"
     title="Evaluation"
@@ -25,19 +33,19 @@ const metadata = {
         title: 'Statistical Similarity',
         description: 'Quantify how closely synthetic data reproduces the statistical properties of the original dataset.',
         icon: 'tabler:chart-bar',
-        callToAction: { text: 'Learn more', href: getPermalink('/features/evaluation/statistical-similarity') },
+        callToAction: { text: 'Learn more', href: getRelativeLocaleUrl(lang, '/features/evaluation/statistical-similarity/') },
       },
       {
         title: 'Objective Relevance',
         description: 'Evaluate whether synthetic data preserves the utility needed for specific downstream tasks and analyses.',
         icon: 'tabler:target-arrow',
-        callToAction: { text: 'Learn more', href: getPermalink('/features/evaluation/objective-relevance') },
+        callToAction: { text: 'Learn more', href: getRelativeLocaleUrl(lang, '/features/evaluation/objective-relevance/') },
       },
       {
         title: 'Turing Test',
         description: 'Apply human- and machine-based discrimination tests to determine if synthetic data is indistinguishable from real data.',
         icon: 'tabler:robot',
-        callToAction: { text: 'Learn more', href: getPermalink('/features/evaluation/turing-test') },
+        callToAction: { text: 'Learn more', href: getRelativeLocaleUrl(lang, '/features/evaluation/turing-test/') },
       },
     ]}
   />

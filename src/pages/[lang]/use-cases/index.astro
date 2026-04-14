@@ -1,15 +1,23 @@
 ---
+import type { GetStaticPaths } from 'astro';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { locales, type Locale } from '~/i18n';
 import Features2 from '~/components/widgets/Features2.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Layout from '~/layouts/PageLayout.astro';
-import { getPermalink } from '~/utils/permalinks';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  return locales.map((locale) => ({ params: { lang: locale } }));
+};
+
+const { lang } = Astro.params as { lang: Locale };
 
 const metadata = {
   title: 'Use Cases',
 };
 ---
 
-<Layout metadata={metadata}>
+<Layout metadata={metadata} lang={lang}>
   <Hero
     tagline="Use Cases"
     title="Real-World Applications"
@@ -25,19 +33,19 @@ const metadata = {
         title: 'Brain Imaging',
         description: 'Generate synthetic neuroimaging data to accelerate research while preserving patient privacy and diagnostic fidelity.',
         icon: 'tabler:brain',
-        callToAction: { text: 'Learn more', href: getPermalink('/use-cases/brain-imaging') },
+        callToAction: { text: 'Learn more', href: getRelativeLocaleUrl(lang, '/use-cases/brain-imaging/') },
       },
       {
         title: 'Breast Cancer',
         description: 'Accelerate oncology research with synthetic clinical and imaging data that preserves diagnostic signal while protecting patient confidentiality.',
         icon: 'tabler:stethoscope',
-        callToAction: { text: 'Learn more', href: getPermalink('/use-cases/breast-cancer') },
+        callToAction: { text: 'Learn more', href: getRelativeLocaleUrl(lang, '/use-cases/breast-cancer/') },
       },
       {
         title: 'Environment',
         description: 'Simulate environmental data to model climate scenarios, pollution patterns, and ecological dynamics at scale.',
         icon: 'tabler:trees',
-        callToAction: { text: 'Learn more', href: getPermalink('/use-cases/environment') },
+        callToAction: { text: 'Learn more', href: getRelativeLocaleUrl(lang, '/use-cases/environment/') },
       },
     ]}
   />

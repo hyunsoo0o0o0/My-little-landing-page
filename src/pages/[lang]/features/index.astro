@@ -1,15 +1,23 @@
 ---
+import type { GetStaticPaths } from 'astro';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { locales, type Locale } from '~/i18n';
 import Features2 from '~/components/widgets/Features2.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Layout from '~/layouts/PageLayout.astro';
-import { getPermalink } from '~/utils/permalinks';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  return locales.map((locale) => ({ params: { lang: locale } }));
+};
+
+const { lang } = Astro.params as { lang: Locale };
 
 const metadata = {
   title: 'Features',
 };
 ---
 
-<Layout metadata={metadata}>
+<Layout metadata={metadata} lang={lang}>
   <Hero
     tagline="Features"
     title="SSTDV Generation & Evaluation"
@@ -25,13 +33,13 @@ const metadata = {
         title: 'Generation',
         description: 'Produce high-fidelity synthetic tabular data through knowledge encoding, relation modeling, data assimilation, and objective-reinforced learning.',
         icon: 'tabler:database',
-        callToAction: { text: 'Learn more', href: getPermalink('/features/generation/') },
+        callToAction: { text: 'Learn more', href: getRelativeLocaleUrl(lang, '/features/generation/') },
       },
       {
         title: 'Evaluation',
         description: 'Assess synthetic data quality with statistical similarity, objective relevance, and Turing-test-based metrics.',
         icon: 'tabler:chart-bar',
-        callToAction: { text: 'Learn more', href: getPermalink('/features/evaluation/') },
+        callToAction: { text: 'Learn more', href: getRelativeLocaleUrl(lang, '/features/evaluation/') },
       },
     ]}
   />
