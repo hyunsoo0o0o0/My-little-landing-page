@@ -1,0 +1,44 @@
+---
+import Features2 from '~/components/widgets/Features2.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Layout from '~/layouts/PageLayout.astro';
+import { getPermalink } from '~/utils/permalinks';
+
+const metadata = {
+  title: 'Use Cases',
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="Use Cases"
+    title="Real-World Applications"
+    subtitle="Discover how synthetic data accelerates research and protects privacy across diverse domains."
+  />
+
+  <Features2
+    title="Explore Use Cases"
+    subtitle="From healthcare to environmental science, synthetic data is transforming what's possible."
+    columns={3}
+    items={[
+      {
+        title: 'Brain Imaging',
+        description: 'Generate synthetic neuroimaging data to accelerate research while preserving patient privacy and diagnostic fidelity.',
+        icon: 'tabler:brain',
+        callToAction: { text: 'Learn more', href: getPermalink('/use-cases/brain-imaging') },
+      },
+      {
+        title: 'Breast Cancer',
+        description: 'Accelerate oncology research with synthetic clinical and imaging data that preserves diagnostic signal while protecting patient confidentiality.',
+        icon: 'tabler:stethoscope',
+        callToAction: { text: 'Learn more', href: getPermalink('/use-cases/breast-cancer') },
+      },
+      {
+        title: 'Environment',
+        description: 'Simulate environmental data to model climate scenarios, pollution patterns, and ecological dynamics at scale.',
+        icon: 'tabler:trees',
+        callToAction: { text: 'Learn more', href: getPermalink('/use-cases/environment') },
+      },
+    ]}
+  />
+</Layout>

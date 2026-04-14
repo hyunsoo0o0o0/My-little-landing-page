@@ -1,0 +1,38 @@
+---
+import Features2 from '~/components/widgets/Features2.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Layout from '~/layouts/PageLayout.astro';
+import { getPermalink } from '~/utils/permalinks';
+
+const metadata = {
+  title: 'Features',
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="Features"
+    title="SSTDV Generation & Evaluation"
+    subtitle="Explore the core capabilities that power synthetic data generation and evaluation across diverse domains."
+  />
+
+  <Features2
+    title="Core Capabilities"
+    subtitle="SSTDV provides two pillars of functionality: data generation and evaluation."
+    columns={2}
+    items={[
+      {
+        title: 'Generation',
+        description: 'Produce high-fidelity synthetic tabular data through knowledge encoding, relation modeling, data assimilation, and objective-reinforced learning.',
+        icon: 'tabler:database',
+        callToAction: { text: 'Learn more', href: getPermalink('/features/generation/') },
+      },
+      {
+        title: 'Evaluation',
+        description: 'Assess synthetic data quality with statistical similarity, objective relevance, and Turing-test-based metrics.',
+        icon: 'tabler:chart-bar',
+        callToAction: { text: 'Learn more', href: getPermalink('/features/evaluation/') },
+      },
+    ]}
+  />
+</Layout>
