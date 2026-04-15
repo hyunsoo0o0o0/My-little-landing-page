@@ -1,6 +1,6 @@
 ---
 import type { GetStaticPaths } from 'astro';
-import { locales, type Locale } from '~/i18n';
+import { t, locales, type Locale } from '~/i18n';
 import Layout from '~/layouts/PageLayout.astro';
 
 import Hero from '~/components/widgets/Hero.astro';
@@ -33,28 +33,30 @@ const metadata = {
     actions={[
       {
         variant: 'primary',
-        text: 'Get template',
+        text: t(lang, 'common.getStarted'),
         href: 'https://github.com/arthelokyo/astrowind',
         target: '_blank',
         icon: 'tabler:download',
       },
-      { text: 'Learn more', href: '#features' },
+      { text: t(lang, 'common.learnMore'), href: '#features' },
     ]}
     image={{ src: '~/assets/images/hero-image.png', alt: 'AstroWind Hero Image' }}
   >
     <Fragment slot="title">
-      Free template for <span class="hidden xl:inline">creating websites with</span>
-      <span class="text-accent dark:text-white"> Astro 5.0</span> + Tailwind CSS
+      {t(lang, 'hero.title')}
+      <!-- Free template for <span class="hidden xl:inline">creating websites with</span> -->
+      <!-- <span class="text-accent dark:text-white"> Astro 5.0</span> + Tailwind CSS -->
     </Fragment>
 
     <Fragment slot="subtitle">
-      <span class="hidden sm:inline">
+      <span set:html={t(lang, 'hero.subtitle')} />
+      <!-- <span class="hidden sm:inline">
         <span class="font-semibold">AstroWind</span> is a free, customizable and production-ready template for Astro 5.0
         + Tailwind CSS.</span
       >
       <span class="block mb-1 sm:hidden font-bold text-blue-600">AstroWind: Production-ready.</span>
       Suitable for Startups, Small Business, SaaS websites, Professional Portfolios, Marketing websites, Landing Pages &
-      Blogs.
+      Blogs. -->
     </Fragment>
   </Hero>
 

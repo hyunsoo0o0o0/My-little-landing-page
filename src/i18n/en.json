@@ -13,12 +13,17 @@
   },
   "footer": {
     "resources": "Resources",
-    "company": "Company",
+    "company": "Research team",
     "about": "About",
-    "madeBy": "Made by"
+    "madeBy": "Made by",
+    "ack": "This work was supported by Institute for Information & communications Technology Promotion(IITP) grant funded by the Korea government(MSIT)\n(No.00223446, Development of object-oriented synthetic data generation and evaluation methods)"
   },
   "common": {
     "learnMore": "Learn more",
     "getStarted": "Get started"
+  },
+  "hero": {
+    "title": "Synthetic Spatio-Temporal Data Vault",
+    "subtitle": "<strong>SSTDV</strong> is a research project for generating and evaluation synthetic training data from the real-world spatiotemporal data."
   }
 }

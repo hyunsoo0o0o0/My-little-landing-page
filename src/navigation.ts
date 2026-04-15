@@ -1,6 +1,7 @@
 import { getRelativeLocaleUrl } from 'astro:i18n';
 import type { Locale } from '~/i18n';
 import { t } from '~/i18n';
+import { externalLinks } from '~/config/externalLinks';
 
 export function getHeaderData(locale: Locale) {
   return {
@@ -43,15 +44,15 @@ export function getHeaderData(locale: Locale) {
       },
       {
         text: t(locale, 'nav.docs'),
-        href: 'https://docs.sstdv.io',
+        href: externalLinks.docs,
       },
     ],
     actions: [
-      {
-        text: t(locale, 'nav.download'),
-        href: 'https://github.com/arthelokyo/astrowind',
-        target: '_blank',
-      },
+      // {
+      //   text: t(locale, 'nav.download'),
+      //   href: externalLinks.download,
+      //   target: '_blank',
+      // },
     ],
   };
 }
@@ -78,7 +79,7 @@ export function getFooterData(locale: Locale) {
         title: t(locale, 'footer.resources'),
         links: [
           { text: t(locale, 'nav.publications'), href: getRelativeLocaleUrl(locale, '/publications/') },
-          { text: t(locale, 'nav.docs'), href: 'https://docs.sstdv.io' },
+          { text: t(locale, 'nav.docs'), href: externalLinks.docs },
         ],
       },
       {
@@ -88,11 +89,11 @@ export function getFooterData(locale: Locale) {
     ],
     secondaryLinks: [],
     socialLinks: [
-      { ariaLabel: 'X', icon: 'tabler:brand-x', href: '#' },
-      { ariaLabel: 'Instagram', icon: 'tabler:brand-instagram', href: '#' },
-      { ariaLabel: 'Facebook', icon: 'tabler:brand-facebook', href: '#' },
-      { ariaLabel: 'Github', icon: 'tabler:brand-github', href: 'https://github.com/arthelokyo/astrowind' },
+      // { ariaLabel: 'X', icon: 'tabler:brand-x', href: externalLinks.social.x },
+      // { ariaLabel: 'Instagram', icon: 'tabler:brand-instagram', href: externalLinks.social.instagram },
+      // { ariaLabel: 'Facebook', icon: 'tabler:brand-facebook', href: externalLinks.social.facebook },
+      { ariaLabel: 'Github', icon: 'tabler:brand-github', href: externalLinks.social.github },
     ],
-    footNote: `${t(locale, 'footer.madeBy')} <a class="text-blue-600 underline dark:text-muted" href="https://github.com/arthelokyo">Arthelokyo</a> · All rights reserved.`,
+    footNote: `${t(locale, 'footer.ack')}`,
   };
 }

@@ -134,6 +134,9 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
                   href={href}
                 >
                   {text}
+                  {(href?.startsWith('http') || href?.startsWith('//')) && (
+                    <Icon name="tabler:external-link" class="w-3.5 h-3.5 ml-1" />
+                  )}
                 </a>
               )}
             </li>

@@ -1,7 +1,8 @@
 ---
 import { Icon } from 'astro-icon/components';
 import { SITE } from 'astrowind:config';
-import { getHomePermalink } from '~/utils/permalinks';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import type { Locale } from '~/i18n';
 
 interface Link {
   text?: string;
@@ -21,9 +22,10 @@ export interface Props {
   socialLinks: Array<Link>;
   footNote?: string;
   theme?: string;
+  currentLang?: Locale;
 }
 
-const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme = 'light' } = Astro.props;
+const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme = 'light', currentLang = 'en' } = Astro.props;
 ---
 
 <footer class:list={[{ dark: theme === 'dark' }, 'relative border-t border-gray-200 dark:border-slate-800 not-prose']}>
@@ -34,7 +36,7 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
     <div class="grid grid-cols-12 gap-4 gap-y-8 sm:gap-8 py-8 md:py-12">
       <div class="col-span-12 lg:col-span-4">
         <div class="mb-2">
-          <a class="inline-block font-bold text-xl" href={getHomePermalink()}>{SITE?.name}</a>
+          <a class="inline-block font-bold text-xl" href={getRelativeLocaleUrl(currentLang, '/')}>{SITE?.name}</a>
         </div>
         <div class="text-sm text-muted flex gap-1">
           {
@@ -60,11 +62,14 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
                 {links.map(({ text, href, ariaLabel }) => (
                   <li class="mb-2">
                     <a
-                      class="text-muted hover:text-gray-700 hover:underline dark:text-gray-400 transition duration-150 ease-in-out"
+                      class="text-muted hover:text-gray-700 hover:underline dark:text-gray-400 transition duration-150 ease-in-out inline-flex items-center"
                       href={href}
                       aria-label={ariaLabel}
                     >
                       <Fragment set:html={text} />
+                      {(href?.startsWith('http') || href?.startsWith('//')) && (
+                        <Icon name="tabler:external-link" class="w-3.5 h-3.5 ml-1" />
+                      )}
                     </a>
                   </li>
                 ))}
